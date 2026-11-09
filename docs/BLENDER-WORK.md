@@ -7,9 +7,10 @@ directly to the section.
 
 ## Models and previews
 
-The gallery shows two models, Delivery Truck and Industrial Robot Arm (the
-Cardboard Box, Roller Conveyor and Roll Cage were removed in October 2026 to keep
-the page focused). Their GLB files are unchanged, with normalized
+The gallery shows one model, the animated Industrial Robot Arm (the Cardboard
+Box, Roller Conveyor and Roll Cage were removed in October 2026 to keep the page
+focused; the Delivery Truck was removed in November 2026 because it is used in a
+company project). Their GLB files are unchanged, with normalized
 filenames under [`assets/models/blender/`](../assets/models/blender/README.md).
 
 Every preview was generated using a rendered view of its actual model as the
@@ -69,7 +70,7 @@ node tests/blender-failures.browser.cjs
 ```
 
 `QA_URL` overrides the local server URL. `QA_OUTPUT` chooses the screenshot and
-report folder. Desktop checks inspect both models; mobile checks use 430px
+report folder. Desktop checks inspect the model; mobile checks use 430px
 and 320px viewports, Japanese/dark and English/light, and screenshot each card.
 Assertions cover deferred GLB/library loading, exact model statistics, camera
 controls, lighting, wireframe, translation, modal focus, scroll locking, touch

@@ -13,21 +13,6 @@ ROOT = Path(__file__).resolve().parent
 # "file" is the GLB beside this script; "animations" lists the clips the inspector
 # offers (clip = glTF animation name), in display order. The first is the default.
 MODELS = {
-    "delivery-truck": {
-        "file": "delivery-truck-animated.glb",
-        "title": {"en": "Delivery Truck", "ja": "配送トラック"},
-        "description": {
-            "en": "A rigged box-body delivery truck for logistics scenes, with rolling wheels, a driving motion, and opening rear and cab doors.",
-            "ja": "物流シーン向けにリグを組んだ箱型の配送トラック。タイヤの回転、走行モーション、荷台と運転席のドアの開閉アニメーション付き。",
-        },
-        "animations": [
-            {"clip": "All_Animations", "label": {"en": "Full sequence", "ja": "全シーケンス"}},
-            {"clip": "Drive_Forward_Back", "label": {"en": "Drive", "ja": "走行"}},
-            {"clip": "Tires_Rotate", "label": {"en": "Wheels", "ja": "タイヤ回転"}},
-            {"clip": "Rear_Doors_Open_Close", "label": {"en": "Rear doors", "ja": "荷台ドア"}},
-            {"clip": "Cab_Doors_Open_Close", "label": {"en": "Cab doors", "ja": "運転席ドア"}},
-        ],
-    },
     "industrial-robot-arm": {
         "file": "industrial-robot-arm-animated.glb",
         "title": {"en": "Industrial Robot Arm", "ja": "産業用ロボットアーム"},

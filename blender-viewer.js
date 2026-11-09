@@ -76,7 +76,7 @@ export async function createModelViewer(container, model, options = {}) {
   let mixer = null;
   let action = null;
   let playing = false;
-  // Follow camera: when a clip moves the whole model (e.g. the truck drives 8 m),
+  // Follow camera: when a clip moves the whole model (e.g. a vehicle driving across the floor),
   // the orbit target, camera, cursor and key light travel with it.
   let followNode = null;
   let grid = null;
@@ -348,7 +348,7 @@ export async function createModelViewer(container, model, options = {}) {
     gltf.scene.traverse(object => {
       if (object.isMesh) { object.castShadow = true; object.receiveShadow = true; }
       // Skinned parts keep their bind-pose bounding sphere, so once an animation
-      // moves the rig (the truck drives 8 m) three.js would wrongly cull them
+      // moves the rig across the scene three.js would wrongly cull them
       // (e.g. the rear wheels vanished). These models are small: always draw them.
       if (object.isSkinnedMesh) object.frustumCulled = false;
     });

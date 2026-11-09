@@ -10,7 +10,7 @@
         en: {
             eyebrow: 'Modeling & asset creation', title: 'Blender Work',
             intro: 'Models created in Blender for logistics, automation, and real-time scenes. Explore each asset in 3D and take a closer look at its geometry.',
-            inspect: 'Inspect model', footnote: 'AI-styled previews based on the models. The inspector displays each original GLB file.',
+            inspect: 'Inspect model', footnote: 'AI-styled preview based on the model. The inspector displays the original GLB file.',
             viewer: 'Interactive model inspector', close: 'Close model inspector', reset: 'Reset view', wireframe: 'Wireframe', rotate: 'Auto-rotate', reducedMotion: 'Auto-rotation is disabled while reduced motion is enabled.', environment: 'Lighting', studio: 'Studio', dark: 'Dark studio',
             help: 'Drag to orbit · Scroll or pinch to zoom · Right-drag or two-finger drag to pan. Keyboard: arrows to orbit, + / − to zoom, Home to reset.',
             triangles: 'Triangles', vertices: 'Exported vertices', meshes: 'Meshes', materials: 'Materials', textures: 'Textures', size: 'GLB file size', dimensions: 'Dimensions (X × Y × Z)',

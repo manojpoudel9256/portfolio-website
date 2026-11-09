@@ -106,7 +106,7 @@ async function ready(page) {
       let requested;
       const started=new Promise(resolve=>requested=resolve);
       await page.route('**/*.glb',async route=>{requested();await gate;await route.continue().catch(()=>{});});
-      const trigger=page.locator('.bw-card [data-inspect-model="delivery-truck"]').last();
+      const trigger=page.locator('.bw-card [data-inspect-model="industrial-robot-arm"]').last();
       await trigger.click();
       await started;
       await page.locator('#biClose').click();

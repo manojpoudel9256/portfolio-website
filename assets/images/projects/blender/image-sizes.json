@@ -1,27 +1,4 @@
 {
-  "delivery-truck": {
-    "native": [
-      1672,
-      941
-    ],
-    "exports": {
-      "768": {
-        "width": 768,
-        "height": 432,
-        "bytes": 35350
-      },
-      "1536": {
-        "width": 1536,
-        "height": 864,
-        "bytes": 128626
-      },
-      "4k": {
-        "width": 3840,
-        "height": 2160,
-        "bytes": 475794
-      }
-    }
-  },
   "industrial-robot-arm": {
     "native": [
       1672,

@@ -85,3 +85,9 @@
     .bi-description { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .bw-cover img { transition: none; } }
+/* One model: a wide card on desktop (image left, details right) instead of a half-width card. */
+@media (min-width: 769px) {
+    .bw-card:only-child { grid-column: 1 / -1; flex-direction: row; align-items: stretch; }
+    .bw-card:only-child .bw-cover { flex: 0 0 58%; }
+    .bw-card:only-child .bw-body { justify-content: center; }
+}

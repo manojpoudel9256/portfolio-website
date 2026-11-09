@@ -1,6 +1,6 @@
 # Blender model assets
 
-These two GLB files are unchanged copies of the portfolio owner's supplied
+This GLB file are unchanged copies of the portfolio owner's supplied
 models. The filenames are normalized for web use; geometry, materials, textures,
 and original file quality are preserved. Their combined transfer size is
 7,866,780 bytes (7.50 MiB), so the viewer should load only the model a visitor
@@ -8,7 +8,6 @@ chooses to inspect.
 
 | Model | File | Triangles | Exported vertices | File bytes |
 | --- | --- | ---: | ---: | ---: |
-| Delivery Truck | `delivery-truck.glb` | 7,876 | 10,860 | 7,715,084 |
 | Industrial Robot Arm | `industrial-robot-arm.glb` | 3,306 | 3,820 | 151,696 |
 
 ## Metadata
@@ -36,7 +35,6 @@ statistics, bounds, dimensions, and resource details.
   external URLs, or external image/buffer dependencies are present.
 - All images are embedded PNG files and were checked for decoding errors. The
   robot arm and conveyor use material colors without image textures.
-- The truck uses optional `KHR_materials_clearcoat`, supported by Three.js's
   GLTFLoader. No model declares a required extension; no Draco/Meshopt/KTX2
   decoder is needed.
 
