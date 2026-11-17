@@ -51,7 +51,10 @@ function setup({ desktop = false, reduced = false, stopped = false, noLenis = fa
     const window = element({
         lenis: noLenis ? undefined : scroller, scrollY: 800, location: { hash: '' },
         matchMedia: query => query.includes('min-width') ? desktopQuery : reducedQuery,
-        scrollTo(options) { this.lastScroll = options; }
+        scrollTo(options) { this.lastScroll = options; },
+        // The shared helper (src/scripts/scroll-to-section.js) owns Lenis/native/reduced-motion scrolling.
+        sectionScrolls: [],
+        scrollToSection(target, opts) { this.sectionScrolls.push([target, opts]); }
     });
     window.history = { pushState: (state, title, hash) => { window.location.hash = hash; } };
     vm.runInNewContext(code, { window, document });
@@ -92,15 +95,15 @@ test('all menu destinations close the menu, navigate, and focus their section', 
         const s = setup(); s.trigger.fire('click'); s.links[i].fire('click');
         const target = s.targets[s.links[i].hash.slice(1)];
         assert.equal(s.window.menuOpen, false); assert.equal(s.window.location.hash, s.links[i].hash);
-        assert.equal(s.scroller.scrolls[0][0], target); assert.equal(s.document.activeElement, target);
+        assert.equal(s.window.sectionScrolls[0][0], target); assert.equal(s.document.activeElement, target);
         assert.equal(target.getAttribute('tabindex'), '-1'); target.fire('blur'); assert.equal(target.getAttribute('tabindex'), null);
     }
 });
-test('reduced motion and missing Lenis use immediate native scrolling', () => {
+test('reduced motion and missing Lenis still navigate through the shared scroll helper', () => {
     for (const options of [{ reduced: true }, { noLenis: true }]) {
         const s = setup(options); s.trigger.fire('click'); s.links[2].fire('click');
-        assert.equal(s.window.lastScroll.behavior, 'instant'); assert.equal(s.scroller.scrolls.length, 0);
-        assert.equal(s.window.lastScroll.top, 1318);
+        assert.equal(s.window.sectionScrolls.length, 1); assert.equal(s.scroller.scrolls.length, 0);
+        assert.equal(s.window.sectionScrolls[0][0], s.targets[s.links[2].hash.slice(1)]);
     }
 });
 test('desktop resize and pagehide release the menu lock; desktop cannot open it', () => {

@@ -53,7 +53,7 @@ and tools it showcases are separate projects.
 - **On-demand video:** short 1080p Unreal Engine previews load after interaction. Touch phones use optimized MP4; desktop retains WebM-first playback with an MP4 fallback.
 - **Blender Work:** an original, animated GLB robot arm with an AI-styled WebP preview and an on-demand Three.js inspector. Orbit, zoom, pan, switch lighting, view wireframes, and inspect measured geometry and file statistics.
 - **Project and photo viewers:** each project explains the problem, what I did and the result; dialogs trap focus, return it on close and always open at the top.
-- **Considered motion:** a code-rendered `hello` introduction (once per session, skippable), scroll reveals, and full reduced-motion handling.
+- **Considered motion:** a short name introduction (under a second, once per session, click or Esc to skip), scroll reveals, and full reduced-motion handling.
 - **Accessible:** keyboard-operable cards and dialogs, a skip link, visible focus for keyboard users only, and AA colour contrast in both themes.
 - **Direct contact:** email, social profiles, and a contact form delivered through Formspree.
 
