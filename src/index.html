@@ -88,10 +88,6 @@
     <!-- Below-the-fold section styles load without blocking first paint (cascade order is kept by link position). -->
     <link rel="stylesheet" href="future-goals.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="blender-work.css" media="print" onload="this.media='all'">
-    <!-- Intro styles are inlined: they must apply before first paint. -->
-    <style>
-        /* @include styles/intro.css */
-    </style>
     <link rel="stylesheet" href="unreal-projects.css" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="future-goals.css">
@@ -110,11 +106,6 @@
 
 <body>
 
-    <!-- Short name intro (about 0.9 s). Hidden by default so no-JS visitors are never blocked. -->
-    <!-- @include partials/intro.html -->
-    <script>
-        /* @include scripts/intro.js */
-    </script>
 
     <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
     <!-- @include partials/mobile-menu.html -->

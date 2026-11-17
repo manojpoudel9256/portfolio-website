@@ -8,8 +8,7 @@
     } catch (e) { }
 })();
 // Hero entrance: hold the hero's small elements before first paint (motion
-// allowed only); the intro releases them as its curtain lifts. The timeout
-// guarantees the hero is never left hidden.
+// allowed only) and release them as soon as the document is parsed.
 (function () {
     try {
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -19,7 +18,8 @@
             root.classList.remove("hero-wait");
             root.classList.add("hero-play");
         };
-        setTimeout(window.__heroPlay, 3200);
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { window.__heroPlay(); }, { once: true });
+        else window.__heroPlay();
     } catch (e) { }
 })();
 // Input modality: focus rings are for keyboard users. After a tap/click,

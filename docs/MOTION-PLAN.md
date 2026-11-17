@@ -43,7 +43,7 @@ bounce: this is a precise-instrument portfolio, not a playful one.
 3. **Hero small type + entrance:** eyebrow (name · Tokyo), a one-line value
    statement instead of "Hey there!", a solid primary button + underline link,
    a numbered focus list (EN + 日本語). A choreographed entrance that starts as
-   the intro curtain lifts: portrait leads, copy follows, under 1.2 s, all CSS.
+   soon as the page is parsed (the intro was removed in Nov 2026): portrait leads, copy follows, under 1.2 s, all CSS.
 4. **Scroll reveals:** one batched reveal (24 px rise, fade, 70 ms stagger) for
    cards on desktop; mask-line reveal for section headings; remove the sideways
    education slide and the scrubbed footer. Phones keep content static (as now).

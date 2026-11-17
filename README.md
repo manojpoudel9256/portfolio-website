@@ -53,7 +53,7 @@ and tools it showcases are separate projects.
 - **On-demand video:** short 1080p Unreal Engine previews load after interaction. Touch phones use optimized MP4; desktop retains WebM-first playback with an MP4 fallback.
 - **Blender Work:** an original, animated GLB robot arm with an AI-styled WebP preview and an on-demand Three.js inspector. Orbit, zoom, pan, switch lighting, view wireframes, and inspect measured geometry and file statistics.
 - **Project and photo viewers:** each project explains the problem, what I did and the result; dialogs trap focus, return it on close and always open at the top.
-- **Considered motion:** a short name introduction (under a second, once per session, click or Esc to skip), scroll reveals, and full reduced-motion handling.
+- **Considered motion:** no opening animation (the hero appears as soon as the page loads), a short hero entrance, scroll reveals, and full reduced-motion handling.
 - **Accessible:** keyboard-operable cards and dialogs, a skip link, visible focus for keyboard users only, and AA colour contrast in both themes.
 - **Direct contact:** email, social profiles, and a contact form delivered through Formspree.
 
@@ -69,7 +69,7 @@ from the desktop composition.
 | Structure and content | Section partials in `src/partials/`, project data in `src/scripts/project-modal.js`, EN/JA dictionaries in `src/scripts/i18n.js` |
 | Presentation | CSS custom properties, Grid and Flexbox; render-critical CSS is inlined, below-the-fold section styles load asynchronously |
 | Interaction | Vanilla JavaScript for navigation, themes, translation, filters, dialogs, and playback |
-| Animation | GSAP, ScrollTrigger and Lenis, loaded after the page is idle; inline CSS/JS for the intro and menu icons |
+| Animation | GSAP, ScrollTrigger and Lenis, loaded after the page is idle; inline CSS/JS for the menu icons |
 | Media | Responsive WebP images (`srcset`), self-hosted WOFF2 fonts, and on-demand WebM/MP4 previews |
 | 3D inspection | Self-hosted Three.js r180, GLTFLoader, OrbitControls, and studio environment lighting; loaded only on request |
 | Contact delivery | Formspree |
@@ -96,11 +96,10 @@ Open **[localhost:4173](http://localhost:4173/)**. Re-run `node build.mjs` after
 editing anything in `src/` (files outside `src/` are copied as they are).
 `node build.mjs --check` verifies every `@include` without writing files.
 
-For layout work, skip the opening animation with `?nopreload=1`. Add
-`&theme=light` or `&theme=dark` to inspect a specific theme:
+Add `?theme=light` or `?theme=dark` to inspect a specific theme:
 
 ```text
-http://localhost:4173/?nopreload=1&theme=light
+http://localhost:4173/?theme=light
 ```
 
 ## Repository guide
@@ -110,13 +109,13 @@ http://localhost:4173/?nopreload=1&theme=light
 ├── build.mjs                  # Builds dist/: expands src/index.html, copies static files
 ├── src/                       # Page source (stitched into one index.html at build time)
 │   ├── index.html             # Page template: <head>, layout and @include markers
-│   ├── partials/              # top-nav, mobile-menu, intro, project-modal, blender-inspector
+│   ├── partials/              # top-nav, mobile-menu, project-modal, blender-inspector
 │   │   └── sections/          # home, work, unreal-projects, blender-work, about-me,
 │   │                          # future-goals, contact
-│   ├── styles/                # Inlined CSS: golden-theme, mobile, mobile-menu, intro
+│   ├── styles/                # Inlined CSS: golden-theme, mobile, mobile-menu
 │   │   └── base/              # Foundation, navigation, hero, work, about, credentials,
 │   │                          # education, contact/footer, responsive
-│   └── scripts/               # Inlined JS: theme-init, intro, page, project-modal (project
+│   └── scripts/               # Inlined JS: theme-init, page, project-modal (project
 │                              # data), image-viewer, i18n (EN/JA), clock, scroll, motion
 ├── mobile-menu.js             # Mobile navigation drawer: focus and scroll handling
 ├── unreal-projects.css / .js  # Unreal Engine cards and media lifecycle
