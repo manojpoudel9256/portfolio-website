@@ -153,6 +153,15 @@
     .lc-caps { gap: 10px; }
     .lc-caps li { font-size: 14px; line-height: 1.5; }
     .lc-bar-sub { font-size: 12px; line-height: 1.5; }
+    /* Language Credentials: each card fits on one phone screen. */
+    .lang-cred .lc-tiles { gap: 6px; margin-top: 14px; }
+    .lang-cred .lc-tile { padding: 8px 10px; }
+    .lang-cred .lc-tlabel { margin-bottom: 2px; }
+    .lang-cred .lc-desc { margin-top: 12px; }
+    /* Japanese dates stay on one line (no 日 left alone). */
+    html[lang="ja"] .lang-cred .lc-tval:is([data-i18n="lcJpTestV"], [data-i18n="lcEnTestV"], [data-i18n="lcEnIssuedV"]) { font-size: 13px; white-space: nowrap; }
+    .lang-cred .lc-perf { margin-top: 14px; padding-top: 12px; gap: 10px; }
+    .lang-cred .lc-caps { gap: 6px; }
 
     .cert-verify { font-size: 14px; line-height: 1.6; }
     /* Certifications: compact 2 x 2 grid, so all four fit on one phone screen.
