@@ -116,7 +116,7 @@
 /* Desktop: the whole section fits on one screen — smaller heading and map,
    and the four goals in one row. */
 @media (min-width: 769px) {
-    .future-goals { padding-top: clamp(32px, 3.5vw, 56px); }
+    .future-goals { padding-top: clamp(32px, 3.5vw, 56px); padding-bottom: clamp(40px, 4vw, 56px); }
     .fg-opening { grid-template-columns: 1.25fr .75fr; gap: clamp(32px, 4vw, 64px); margin-bottom: clamp(28px, 3vw, 44px); }
     .fg-kicker { margin-bottom: 16px; }
     .fg-title { font-size: clamp(2.4rem, 3.8vw, 3.6rem); margin-bottom: 16px; }
@@ -138,7 +138,7 @@
     /* Phones: the system map alone fills a screen, so it is left out; the
        goals stay compact so the whole section fits on one screen. */
     .fg-art { display: none; }
-    .future-goals { padding-top: 32px; }
+    .future-goals { padding-top: 32px; padding-bottom: 32px; }
     /* the number/tag line repeats the topics line below it */
     .fg-card-top { display: none; }
     /* title + topics carry each goal on a phone; descriptions stay on desktop */

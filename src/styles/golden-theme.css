@@ -271,7 +271,8 @@ html[data-theme="dark"] .lang-cred {
 
 .footer {
     background: var(--bg);
-    padding: var(--section-gap) 0 var(--space-5);
+    /* lighter top padding: Goals sits directly above, so the gap stays modest */
+    padding: clamp(40px, 5vw, 72px) 0 var(--space-5);
     min-height: auto;
     border-top: 1px solid var(--hairline);
 }
