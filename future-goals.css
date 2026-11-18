@@ -126,9 +126,6 @@
 @media (min-width: 769px) {
     .future-goals { padding-top: clamp(32px, 3.5vw, 56px); padding-bottom: clamp(40px, 4vw, 56px); }
     .fg-opening { grid-template-columns: 1.25fr .75fr; gap: clamp(32px, 4vw, 64px); margin-bottom: clamp(28px, 3vw, 44px); }
-    .fg-kicker { margin-bottom: 16px; }
-    .fg-title { font-size: clamp(2.4rem, 3.8vw, 3.6rem); margin-bottom: 16px; }
-    .fg-intro { font-size: 16px; line-height: 1.65; }
     .fg-art figcaption { margin-top: 8px; }
     .fg-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(24px, 2.6vw, 40px); row-gap: 32px; }
     .fg-card { padding-top: 18px; }
@@ -176,3 +173,4 @@
     .fg-signals { display: none; }
     .fg-card::before, .fg-number { transition: none; }
 }
+@media (max-width: 768px) and (max-height: 700px) { .future-goals { padding-block: 22px; } }

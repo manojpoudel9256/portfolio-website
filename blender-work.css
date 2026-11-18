@@ -101,3 +101,12 @@
     .bw-card:only-child .bw-cover { flex: 0 0 58%; }
     .bw-card:only-child .bw-body { justify-content: center; }
 }
+
+/* One screen: lighter padding so the heading, card and footnote all fit
+   under the menu bar; short phones drop the intro (and, on the shortest,
+   the card description). */
+@media (min-width: 769px) { .blender-work { padding-block: clamp(16px, 3vh, 44px); } }
+@media (max-width: 768px) { .blender-work { padding-block: 20px; } }
+@media (max-width: 768px) and (max-height: 760px) { .bw-intro.sec-sub { display: none; } .bw-footnote { margin-top: 10px; } }
+@media (max-width: 768px) and (max-height: 700px) { .bw-desc { display: none; } }
+@media (min-width: 769px) and (max-height: 740px) { .bw-heading { margin-bottom: 18px; } .bw-footnote { margin-top: 8px; } }

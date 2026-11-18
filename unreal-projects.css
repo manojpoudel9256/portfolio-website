@@ -63,8 +63,6 @@ html[data-theme="dark"] .ue-tech img { filter: invert(1); }
 
 @media (min-width: 769px) {
     .unreal-work { padding-block: clamp(20px, 3vh, 44px); }
-    .unreal-work .pw-title { font-size: clamp(2.3rem, 3.8vw, 3.5rem); }
-    .unreal-work .pw-sub { margin-top: 8px; font-size: var(--fs-300); }
     .unreal-work .ue-heading { margin-bottom: var(--space-3); }
     /* On short screens the cards get narrower so their 16:9 posters fit. */
     .unreal-work .ue-grid {
