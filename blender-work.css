@@ -1,6 +1,15 @@
 /* Blender gallery and on-demand model inspector, using the shared warm palette. */
 .blender-work { padding-block: var(--section-gap); background: var(--bg); color: var(--ink); border-top: 1px solid var(--hairline); scroll-margin-top: 88px; }
-.bw-inner { max-width: var(--maxw); padding-inline: var(--gutter); margin-inline: auto; }
+.bw-inner { max-width: var(--maxw); padding-inline: var(--gutter); margin-inline: auto; width: 100%; }
+/* Opened from the menu, the section fills the screen under the menu bar on its
+   own (content centred), so the next section never peeks in below it. */
+.blender-work {
+    min-height: calc(100vh - var(--nav-h, 72px));
+    min-height: calc(100svh - var(--nav-h, 72px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .bw-heading { max-width: 800px; margin-bottom: 36px; }
 .bw-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
 .bw-title { font-family: var(--font-display); font-size: var(--section-heading); line-height: 1.08; letter-spacing: var(--tracking-display); font-weight: 600; }

@@ -18,7 +18,15 @@
     padding-block: var(--section-gap);
     border-top: 1px solid var(--fg-line);
     scroll-margin-top: 96px;
+    /* Exactly one screen under the menu bar, content centred: opened from the
+       menu, Goals shows on its own and Contact starts just below the fold. */
+    min-height: calc(100vh - var(--nav-h, 72px));
+    min-height: calc(100svh - var(--nav-h, 72px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+.fg-container { width: 100%; }
 .fg-container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
 .fg-opening { display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: clamp(32px, 5vw, 80px); margin-bottom: clamp(48px, 7vw, 104px); }
 .fg-kicker { color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 22px; }
