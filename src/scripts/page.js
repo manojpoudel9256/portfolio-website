@@ -186,3 +186,22 @@ window.__motion.then(function () {
         else map.pauseAnimations();
     }, { threshold: 0.15 }).observe(art);
 })();
+
+
+// SECTION HEADING ICONS — each icon tile pops in and its drawing plays once,
+// the first time the heading scrolls into view. Without IntersectionObserver
+// or with reduced motion the icons simply stay still.
+(function () {
+    const marks = document.querySelectorAll(".project-heading-mark");
+    if (!marks.length || !("IntersectionObserver" in window)) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.documentElement.classList.add("marks-armed");
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+        });
+    }, { threshold: 0.6 });
+    marks.forEach(mark => io.observe(mark));
+})();

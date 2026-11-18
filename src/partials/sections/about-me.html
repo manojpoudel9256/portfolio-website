@@ -3,7 +3,7 @@
         <div class="about-me-header">
             <span class="sec-kicker" data-i18n="aboutKicker">Profile</span>
             <div class="project-title-row">
-                <span class="project-heading-mark sec-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span>
+                <span class="project-heading-mark sec-mark" aria-hidden="true"><svg class="mi mi-about" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="mi-head" cx="10" cy="7.6" r="3.1"/><path d="M4 20.2c0-3.6 2.7-6.1 6-6.1 1.6 0 3 .5 4.1 1.5"/><g class="mi-arm"><path d="M15.4 15.2 18.6 10"/><circle cx="19" cy="9.3" r="0.9"/></g></svg></span>
                 <h2 class="sec-title" data-i18n="aboutTitle">About Me</h2>
             </div>
             <p class="sec-sub" data-i18n="aboutSubtitle">Experience, education, and the story so far</p>
@@ -14,7 +14,7 @@
             <div class="sec-head">
                 <span class="sec-kicker" data-i18n="expKicker">Career</span>
                 <div class="project-title-row">
-                    <span class="project-heading-mark sec-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12.5h18"/></svg></span>
+                    <span class="project-heading-mark sec-mark" aria-hidden="true"><svg class="mi mi-career" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="mi-steps" pathLength="1" d="M3 20h4.4v-4.2h4.4v-4.2h4.4V7.4H20"/><g class="mi-flag"><path d="M20 7.4V2.4"/><path class="mi-pennant" d="M20 2.6 15.6 4.2 20 5.8z"/></g></svg></span>
                     <h2 class="section-title sec-title" data-i18n="expTitle">Experience</h2>
                 </div>
             </div>
@@ -88,13 +88,75 @@
             </div>
         </div>
 
+        <!-- Education — premium slide-in cards -->
+        <div class="timeline-section">
+            <div class="sec-head">
+                <span class="sec-kicker" data-i18n="eduKicker">Academic background</span>
+                <div class="project-title-row">
+                    <span class="project-heading-mark sec-mark" aria-hidden="true"><svg class="mi mi-edu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="mi-cap"><path d="M2.5 9.4 12 5l9.5 4.4L12 13.8z"/><path d="M6.4 11.3v4.3c0 1.5 2.5 2.9 5.6 2.9s5.6-1.4 5.6-2.9v-4.3"/></g><g class="mi-tassel"><path d="M21.5 9.4v5"/><circle class="mi-knot" cx="21.5" cy="15.4" r="0.95"/></g></svg></span>
+                    <h2 class="section-title sec-title" data-i18n="eduTitle">Education</h2>
+                </div>
+            </div>
+            <div class="edu-grid">
+
+                <article class="edu-card"
+                    onclick="openImageModal(this)">
+                    <div class="edu-photo">
+                        <picture>
+                            <source srcset="assets/images/education/hokkaido-cyber-creators-college.webp" type="image/webp">
+                            <img src="assets/images/education/hokkaido-cyber-creators-college.webp" srcset="assets/images/education/hokkaido-cyber-creators-college-720.webp 720w, assets/images/education/hokkaido-cyber-creators-college.webp 1200w" sizes="(max-width: 768px) 92vw, 640px" data-i18n-alt="edu1PhotoAlt" alt="Classroom at Hokkaido Cyber Creator Professional Training College" width="1200"
+                                height="800" loading="lazy">
+                        </picture>
+                        <span class="edu-year">2024 — 2026</span>
+                    </div>
+                    <div class="edu-body">
+                        <span class="edu-school" data-i18n="edu1School">Hokkaido Cyber Creator Professional Training College</span>
+                        <h3 class="edu-title" id="edu-title-1" data-i18n="edu1Title">IT Department</h3>
+                        <p class="edu-desc" data-i18n="edu1Desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
+                            web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
+                        <button type="button" class="edu-more" aria-labelledby="edu-view-1 edu-title-1"
+                            onclick="event.stopPropagation(); openImageModal(this.closest('.edu-card'))"><span id="edu-view-1" data-i18n="viewPhoto">View photo</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="edu-card"
+                    onclick="openImageModal(this)">
+                    <div class="edu-photo">
+                        <img src="assets/images/education/hokkaido-japanese-language-academy-sapporo-graduation.jpg" srcset="assets/images/education/hokkaido-japanese-language-academy-sapporo-graduation-720.webp 720w, assets/images/education/hokkaido-japanese-language-academy-sapporo-graduation.jpg 768w" sizes="(max-width: 768px) 92vw, 640px" data-i18n-alt="edu2PhotoAlt" alt="Graduation at Hokkaido Japanese Language Academy Sapporo Main Campus"
+                            width="768" height="1024" loading="lazy" decoding="async"
+                            style="object-position: center 25%;">
+                        <span class="edu-year">2022 — 2024</span>
+                    </div>
+                    <div class="edu-body">
+                        <span class="edu-school" data-i18n="edu2School">Hokkaido Japanese Language Academy Sapporo Main Campus</span>
+                        <h3 class="edu-title" id="edu-title-2" data-i18n="edu2Title">Japanese Language</h3>
+                        <p class="edu-desc" data-i18n="edu2Desc">Achieved JLPT N3 certification. Deep focus on Japanese
+                            corporate culture, business manners, and volunteer leadership.</p>
+                        <button type="button" class="edu-more" aria-labelledby="edu-view-2 edu-title-2"
+                            onclick="event.stopPropagation(); openImageModal(this.closest('.edu-card'))"><span id="edu-view-2" data-i18n="viewPhoto">View photo</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
         <!-- Language Credentials -->
         <div class="lang-cred">
             <div class="lc-head">
                 <div class="lc-head-lead">
                     <span class="lc-kicker sec-kicker" data-i18n="lcKicker">Japanese · English</span>
                     <div class="project-title-row">
-                        <span class="project-heading-mark sec-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h10M8 3v2M5.5 5c.8 3.3 2.9 5.8 6 7.2M10.5 5C9.6 8.5 7.2 11 3.5 12.5"/><path d="M13 21l4-9 4 9M14.4 18h5.2"/></svg></span>
+                        <span class="project-heading-mark sec-mark" aria-hidden="true"><svg class="mi mi-lang" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="mi-bub1"><path d="M3 3h7.5A1.5 1.5 0 0 1 12 4.5V10a1.5 1.5 0 0 1-1.5 1.5H6.5L4 14v-2.5H3A1.5 1.5 0 0 1 1.5 10V4.5A1.5 1.5 0 0 1 3 3z"/><path d="M4.6 9.6 6.75 4.9l2.15 4.7M5.4 8h2.7"/></g><g class="mi-bub2"><path d="M13.5 12.5H21a1.5 1.5 0 0 1 1.5 1.5v4.5A1.5 1.5 0 0 1 21 20h-1v2.5L17.5 20h-4A1.5 1.5 0 0 1 12 18.5V14a1.5 1.5 0 0 1 1.5-1.5z"/><text class="mi-glyph" x="17.25" y="18.55" text-anchor="middle">あ</text></g></svg></span>
                         <h2 class="lc-title sec-title" data-i18n="lcTitle">Language Credentials</h2>
                     </div>
                     <p class="lc-sub sec-sub" data-i18n="lcSub">Professional language qualifications that strengthen my
@@ -386,7 +448,7 @@
                 <div class="cert-head-lead">
                     <span class="cert-kicker sec-kicker" data-i18n="certKicker">Credentials</span>
                     <div class="project-title-row">
-                        <span class="project-heading-mark sec-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.6 13.9 7 22l5-2.8 5 2.8-1.6-8.1"/></svg></span>
+                        <span class="project-heading-mark sec-mark" aria-hidden="true"><svg class="mi mi-certs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.6 3.5 10.6 9.6M15.4 3.5l-2 6.1"/><g class="mi-medal"><circle cx="12" cy="14.6" r="5"/><path class="mi-star" d="m12 12.1.8 1.6 1.8.3-1.3 1.2.3 1.8-1.6-.9-1.6.9.3-1.8-1.3-1.2 1.8-.3z"/></g></svg></span>
                         <h2 class="cert-title sec-title" data-i18n="certTitle">Licenses &amp; Certifications</h2>
                     </div>
                     <p class="cert-sub sec-sub" data-i18n="certSub">Ongoing professional learning and industry-recognized
@@ -585,68 +647,6 @@
                 </svg>
                 <span data-i18n="certFoot">Credential links open in a new tab and may require sign-in.</span>
             </p>
-        </div>
-
-        <!-- Education — premium slide-in cards -->
-        <div class="timeline-section">
-            <div class="sec-head">
-                <span class="sec-kicker" data-i18n="eduKicker">Academic background</span>
-                <div class="project-title-row">
-                    <span class="project-heading-mark sec-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5 12 4.5l10 5-10 5z"/><path d="M6 11.5v4.8c0 1.6 2.7 3.2 6 3.2s6-1.6 6-3.2v-4.8M22 9.5v5.5"/></svg></span>
-                    <h2 class="section-title sec-title" data-i18n="eduTitle">Education</h2>
-                </div>
-            </div>
-            <div class="edu-grid">
-
-                <article class="edu-card"
-                    onclick="openImageModal(this)">
-                    <div class="edu-photo">
-                        <picture>
-                            <source srcset="assets/images/education/hokkaido-cyber-creators-college.webp" type="image/webp">
-                            <img src="assets/images/education/hokkaido-cyber-creators-college.webp" srcset="assets/images/education/hokkaido-cyber-creators-college-720.webp 720w, assets/images/education/hokkaido-cyber-creators-college.webp 1200w" sizes="(max-width: 768px) 92vw, 640px" data-i18n-alt="edu1PhotoAlt" alt="Classroom at Hokkaido Cyber Creator Professional Training College" width="1200"
-                                height="800" loading="lazy">
-                        </picture>
-                        <span class="edu-year">2024 — 2026</span>
-                    </div>
-                    <div class="edu-body">
-                        <span class="edu-school" data-i18n="edu1School">Hokkaido Cyber Creator Professional Training College</span>
-                        <h3 class="edu-title" id="edu-title-1" data-i18n="edu1Title">IT Department</h3>
-                        <p class="edu-desc" data-i18n="edu1Desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
-                            web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
-                        <button type="button" class="edu-more" aria-labelledby="edu-view-1 edu-title-1"
-                            onclick="event.stopPropagation(); openImageModal(this.closest('.edu-card'))"><span id="edu-view-1" data-i18n="viewPhoto">View photo</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M5 12h14M13 6l6 6-6 6" />
-                            </svg>
-                        </button>
-                    </div>
-                </article>
-
-                <article class="edu-card"
-                    onclick="openImageModal(this)">
-                    <div class="edu-photo">
-                        <img src="assets/images/education/hokkaido-japanese-language-academy-sapporo-graduation.jpg" srcset="assets/images/education/hokkaido-japanese-language-academy-sapporo-graduation-720.webp 720w, assets/images/education/hokkaido-japanese-language-academy-sapporo-graduation.jpg 768w" sizes="(max-width: 768px) 92vw, 640px" data-i18n-alt="edu2PhotoAlt" alt="Graduation at Hokkaido Japanese Language Academy Sapporo Main Campus"
-                            width="768" height="1024" loading="lazy" decoding="async"
-                            style="object-position: center 25%;">
-                        <span class="edu-year">2022 — 2024</span>
-                    </div>
-                    <div class="edu-body">
-                        <span class="edu-school" data-i18n="edu2School">Hokkaido Japanese Language Academy Sapporo Main Campus</span>
-                        <h3 class="edu-title" id="edu-title-2" data-i18n="edu2Title">Japanese Language</h3>
-                        <p class="edu-desc" data-i18n="edu2Desc">Achieved JLPT N3 certification. Deep focus on Japanese
-                            corporate culture, business manners, and volunteer leadership.</p>
-                        <button type="button" class="edu-more" aria-labelledby="edu-view-2 edu-title-2"
-                            onclick="event.stopPropagation(); openImageModal(this.closest('.edu-card'))"><span id="edu-view-2" data-i18n="viewPhoto">View photo</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M5 12h14M13 6l6 6-6 6" />
-                            </svg>
-                        </button>
-                    </div>
-                </article>
-
-            </div>
         </div>
 
     </div>

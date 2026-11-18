@@ -335,17 +335,22 @@
     const secs = links
         .map(a => document.getElementById(a.getAttribute("href").slice(1)))
         .filter(Boolean);
-    if ("IntersectionObserver" in window && secs.length) {
-        const io = new IntersectionObserver(() => {
-            // Certifications sits inside About; prefer the nested destination
-            // and restore About when scrolling back into its other content.
-            const active = secs.filter(section => {
-                const rect = section.getBoundingClientRect();
-                return rect.top <= innerHeight * .5 && rect.bottom >= innerHeight * .45;
-            }).pop();
-            if (active) setActive(active.id);
-        }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-        secs.forEach(s => io.observe(s));
+    if (secs.length) {
+        // The active link is the last section (in page order) whose top has
+        // passed the middle of the screen, so the highlight only ever moves
+        // forward as you scroll down (Certifications sits inside About and
+        // About's remaining padding must not take the highlight back).
+        let queued = false;
+        const update = () => {
+            queued = false;
+            const mid = innerHeight * .5;
+            const active = secs.filter(section => section.getBoundingClientRect().top <= mid).pop();
+            setActive(active ? active.id : "home");
+        };
+        const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+        addEventListener("scroll", queue, { passive: true });
+        addEventListener("resize", queue, { passive: true });
+        update();
     }
 
     // ===== Contact form — Formspree AJAX (no page redirect) =====
