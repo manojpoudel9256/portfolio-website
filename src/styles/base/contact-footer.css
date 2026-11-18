@@ -474,3 +474,40 @@
     box-shadow: 0 10px 26px color-mix(in srgb, var(--sc) 45%, transparent);
 }
 
+
+/* ── Phones: the form comes straight after the heading and fits on one
+   screen; email, socials, "Where I can help" and the status chip follow it.
+   (.contact-left becomes display: contents so its pieces can be reordered
+   around the form.) ── */
+@media (max-width: 768px) {
+    .footer .contact-layout { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .footer .contact-left { display: contents; }
+    .footer .contact-left > * { order: 20; }
+    .footer .contact-left > .sec-kicker { order: 1; }
+    .footer .contact-left > .project-title-row { order: 2; }
+    .footer .contact-left > .cl-sub { order: 3; }
+    .footer .contact-card { order: 4; margin-top: 18px; padding: 16px; gap: 12px; }
+    .footer .contact-left > .cl-contacts { order: 5; margin-top: 28px; }
+    .footer .contact-left > .cl-socials { order: 6; margin-top: 14px; }
+    .footer .contact-left > .cl-divider { order: 7; margin-top: 28px; }
+    .footer .contact-left > .cl-kicker { order: 8; }
+    .footer .contact-left > .cl-blurb { order: 9; }
+    .footer .contact-left > .cl-eyebrow { order: 10; margin-top: 22px; }
+
+    /* compact form: the section heading already says "Send a message" */
+    .footer .cc-head { display: none; }
+    .footer .cf-field { gap: 6px; }
+    .footer .cf-topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .footer .cf-topic { min-height: 44px; padding: 6px 8px; font-size: 11px; line-height: 1.25; white-space: normal; text-align: center; justify-content: center; }
+    .footer .cf-field textarea { min-height: 96px; height: 96px; }
+}
+/* short phones (e.g. iPhone SE): a little tighter still */
+@media (max-width: 768px) and (max-height: 760px) {
+    .footer .contact-left > .cl-sub { display: none; }
+    .footer .contact-card { margin-top: 14px; gap: 10px; }
+    .footer .cf-field input { min-height: 44px; padding-block: 10px; }
+    .footer .cf-field textarea { min-height: 80px; height: 80px; }
+}
+@media (max-width: 768px) { .footer.footer { padding-top: 28px; } }
+@media (max-width: 768px) and (max-height: 760px) { .footer.footer { padding-top: 16px; } }
+@media (max-width: 768px) and (max-height: 700px) { .footer .contact-card { gap: 8px; padding-block: 14px; } .footer .cf-field textarea { min-height: 72px; height: 72px; } }
