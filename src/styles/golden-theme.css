@@ -401,8 +401,35 @@ html[data-theme="dark"] .lang-cred {
     .sec-head { margin-bottom: 20px; }
     .contact-left .cl-eyebrow { margin-top: 18px; }
 }
-/* About Me's heading is followed straight away by Experience's: give it air */
-.about-me-header.about-me-header { margin-bottom: clamp(48px, 6vw, 80px); }
+/* About: a centred chapter mark (thin gold rules, ✦, italic Playfair) instead
+   of a second big heading straight above Experience's. */
+.about-chapter {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 1.6vw, 18px);
+    margin: 0 0 clamp(36px, 4.5vw, 60px);
+}
+.about-chapter::before,
+.about-chapter::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent-icon, var(--accent)) 70%, transparent));
+}
+.about-chapter::after { background: linear-gradient(to left, transparent, color-mix(in srgb, var(--accent-icon, var(--accent)) 70%, transparent)); }
+.about-chapter .about-chapter-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .01em;
+    color: var(--ink);
+    white-space: nowrap;
+}
+html[lang="ja"] .about-chapter .about-chapter-title { font-style: normal; letter-spacing: .08em; }
+.about-chapter-star { color: var(--accent-icon, var(--accent)); font-size: 12px; line-height: 1; }
 
 /* ── Heading icons: pop in, then the drawing plays once (page.js adds .is-in
    when the heading scrolls into view). Still under reduced motion. ── */
