@@ -113,11 +113,40 @@
     .fg-card:hover .fg-number { color: var(--accent); }
 }
 
+/* Desktop: the whole section fits on one screen — smaller heading and map,
+   and the four goals in one row. */
+@media (min-width: 769px) {
+    .future-goals { padding-top: clamp(32px, 3.5vw, 56px); }
+    .fg-opening { grid-template-columns: 1.25fr .75fr; gap: clamp(32px, 4vw, 64px); margin-bottom: clamp(28px, 3vw, 44px); }
+    .fg-kicker { margin-bottom: 16px; }
+    .fg-title { font-size: clamp(2.4rem, 3.8vw, 3.6rem); margin-bottom: 16px; }
+    .fg-intro { font-size: 16px; line-height: 1.65; }
+    .fg-art figcaption { margin-top: 8px; }
+    .fg-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(24px, 2.6vw, 40px); row-gap: 32px; }
+    .fg-card { padding-top: 18px; }
+    .fg-card-top { margin-bottom: 12px; }
+    .fg-card h3 { font-size: clamp(19px, 1.6vw, 23px); margin-bottom: 8px; }
+    .fg-topics { font-size: 12.5px; line-height: 1.55; margin-bottom: 10px; }
+    .fg-description { font-size: 14.5px; line-height: 1.6; }
+}
+@media (min-width: 769px) and (max-width: 1100px) {
+    .fg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 768px) {
     .fg-opening, .fg-grid { grid-template-columns: minmax(0, 1fr); }
-    .fg-opening { gap: 24px; margin-bottom: 36px; }
-    .fg-kicker { margin-bottom: 18px; font-size: 12px; }
-    .fg-title { margin-bottom: 20px; }
+    /* Phones: the system map alone fills a screen, so it is left out; the
+       goals stay compact so the whole section fits on one screen. */
+    .fg-art { display: none; }
+    .future-goals { padding-top: 32px; }
+    /* the number/tag line repeats the topics line below it */
+    .fg-card-top { display: none; }
+    /* title + topics carry each goal on a phone; descriptions stay on desktop */
+    .fg-description { display: none; }
+    .fg-opening { gap: 24px; margin-bottom: 20px; }
+    .fg-kicker { margin-bottom: 12px; font-size: 12px; }
+    .fg-kicker::after { margin-top: 10px; }
+    .fg-title { margin-bottom: 12px; }
     .fg-intro { font-size: 15px; line-height: 1.6; }
     .fg-map { border-radius: 18px; }
     /* the map renders at ~55 % on phones: enlarge its text in viewBox units */
@@ -125,12 +154,12 @@
     .fg-note-sm { font-size: 14px; letter-spacing: .02em; }
     .fg-chip-label { font-size: 17px; }
     .fg-art figcaption { text-align: left; }
-    .fg-grid { row-gap: 28px; }
-    .fg-card { padding-top: 20px; }
-    .fg-card-top { margin-bottom: 12px; }
-    .fg-card h3 { font-size: clamp(19px, 5.1vw, 21px); margin-bottom: 10px; }
-    .fg-topics { font-size: 12.5px; margin-bottom: 12px; }
-    .fg-description { font-size: 15px; line-height: 1.65; }
+    .fg-grid { row-gap: 16px; }
+    .fg-card { padding-top: 12px; }
+    .fg-card-top { margin-bottom: 6px; }
+    .fg-card h3 { font-size: clamp(18px, 4.8vw, 20px); margin-bottom: 4px; }
+    .fg-topics { font-size: 12.5px; line-height: 1.5; margin-bottom: 4px; }
+    .fg-description { font-size: 14px; line-height: 1.55; }
 }
 
 /* Reduced motion: a still drawing — no arm cycle, no signals, no entrance. */
