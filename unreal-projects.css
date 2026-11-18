@@ -20,10 +20,11 @@
 .ue-media-link { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
 .ue-media-link:focus-visible { outline-offset: -5px; border-radius: inherit; }
 .ue-card.is-manual .ue-media-link { display: none; }
-.ue-play-icon { position: absolute; right: 18px; bottom: 18px; display: grid; place-items: center; width: 44px; height: 44px; background: rgba(255, 253, 250, .94); color: #1b1916; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; box-shadow: 0 2px 16px #0002; transition: opacity .2s ease; }
+/* centred: the posters' own badges sit in the corners */
+.ue-play-icon { position: absolute; left: calc(50% - 22px); top: calc(50% - 22px); display: grid; place-items: center; width: 44px; height: 44px; background: rgba(255, 253, 250, .94); color: #1b1916; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; box-shadow: 0 2px 16px #0002; transition: opacity .2s ease; }
 .ue-play-icon svg { width: 16px; height: 16px; margin-left: 2px; }
 .ue-card.is-ready .ue-play-icon { opacity: 0; }
-.ue-loading { display: none; position: absolute; z-index: 3; right: 18px; bottom: 18px; width: 44px; height: 44px; border-radius: 50%; background: #fffdfaf0; pointer-events: none; }
+.ue-loading { display: none; position: absolute; z-index: 3; left: calc(50% - 22px); top: calc(50% - 22px); width: 44px; height: 44px; border-radius: 50%; background: #fffdfaf0; pointer-events: none; }
 .ue-loading::after { content: ''; position: absolute; inset: 13px; border: 2px solid #e7e5e4; border-top-color: #ca8a04; border-radius: 50%; animation: ue-spin .8s linear infinite; }
 .ue-card.is-loading .ue-loading { display: block; }
 @keyframes ue-spin { to { transform: rotate(360deg); } }
@@ -112,7 +113,8 @@ html[data-theme="dark"] .ue-tech img { filter: invert(1); }
     .unreal-work .ue-grid { max-width: none; }
     .unreal-work .ue-card { flex-direction: row; align-items: center; gap: 12px; }
     .unreal-work .ue-media { flex: 0 0 46%; }
-    .unreal-work .ue-play-icon { right: 8px; bottom: 8px; width: 36px; height: 36px; }
+    .unreal-work :is(.ue-play-icon, .ue-loading) { left: calc(50% - 18px); top: calc(50% - 18px); width: 36px; height: 36px; }
+    .unreal-work .ue-loading::after { inset: 10px; }
     .unreal-work .ue-body { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 0; min-width: 0; }
     .unreal-work .ue-name { font-size: 17px; }
     .unreal-work .ue-toggle { min-height: 40px; padding: 6px 12px; }

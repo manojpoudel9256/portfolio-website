@@ -8,17 +8,12 @@
       "768": {
         "width": 768,
         "height": 432,
-        "bytes": 9208
+        "bytes": 46394
       },
       "1536": {
         "width": 1536,
         "height": 864,
-        "bytes": 30360
-      },
-      "4k": {
-        "width": 3840,
-        "height": 2160,
-        "bytes": 178390
+        "bytes": 98830
       }
     }
   }

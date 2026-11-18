@@ -18,10 +18,8 @@ image reference. The artwork presents the geometry in a realistic ivory studio
 setting; the live inspector always displays the original GLB. The page labels
 the previews as AI-styled artwork.
 
-The image generator returned 1672 × 941 PNGs. The **3840 × 2160 WebP exports are
-upscaled**, not native 4K generations. Responsive 768 × 432 and 1536 × 864 copies
-avoid unnecessary 4K downloads on smaller screens. The 768px images range from
-9–36 KB; 4K exports range from 178–549 KB. See the
+The robot arm preview is a 1672 × 941 poster, served as 768 × 432 and
+1536 × 864 WebP copies (about 45 KB and 96 KB). There is no 4K export. See the
 [artwork prompts and conversion notes](../assets/images/projects/blender/ARTWORK.md).
 
 ## Inspector

@@ -59,7 +59,7 @@
             const data = models[card.dataset.model];
             card.querySelector('.bw-name').textContent = data.title[lang()];
             card.querySelector('.bw-desc').textContent = data.description[lang()];
-            card.querySelector('.bw-cover img').alt = data.title[lang()] + (lang() === 'ja' ? 'のAIスタジオプレビュー' : ' — AI studio preview');
+            card.querySelector('.bw-cover img').alt = data.title[lang()] + (lang() === 'ja' ? '：暗い工場に立つ白いロボットアームのプレビュー画像' : ': preview poster of the white robot arm in a dark factory');
             card.querySelectorAll('[data-inspect-model]').forEach(button => button.setAttribute('aria-label', text('inspect') + ': ' + data.title[lang()]));
             card.querySelector('[data-bw-triangles]').textContent = number(data.stats.triangles) + (lang() === 'ja' ? ' 三角形' : ' triangles');
             const sizeEl = card.querySelector('[data-bw-size]');
