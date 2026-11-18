@@ -164,7 +164,7 @@ const PROJECTS = {
         }
     },
     glbForge: {
-        img: "assets/images/projects/glb-optimizer.webp?v=2", cover: true, fullImg: true, type: "website", repo: true,
+        img: "assets/images/projects/glb-optimizer.webp?v=3", cover: true, fullImg: true, type: "website", repo: true,
         live: "https://github.com/manojpoudel9256/GLBOptimizer",
         en: {
             cs: ["For very complex objects, our team generates 3D models with Meshy AI. They often come out extremely dense — around a million triangles and ~20 MB — which makes Unreal Engine hang or crash on import.", "Built GLB Forge to simplify meshes and downscale textures locally in the browser, with a before/after 3D viewer to confirm the model still looks right.", "Typical results on our AI-generated models: about 1M → 100k triangles and ~20 MB → 4–5 MB, so they import cleanly and run smoothly in Unreal Engine."],
