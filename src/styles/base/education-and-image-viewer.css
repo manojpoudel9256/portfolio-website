@@ -253,3 +253,16 @@
     .edu-grid .edu-desc { grid-column: 1 / -1; grid-row: 4; margin: 10px 0 2px; font-size: 14px; line-height: 1.55; }
 }
 @media (min-width: 769px) and (max-height: 760px) { .edu-grid .edu-photo { aspect-ratio: 2.4 / 1; } }
+
+/* One screen: with Education's heading under the menu bar, the section fills
+   the rest of the screen (content centred), so the next block never peeks in.
+   Language Credentials does the same on desktop, where it fits. */
+.edu-section,
+.lang-cred {
+    min-height: calc(100vh - var(--nav-h, 72px));
+    min-height: calc(100svh - var(--nav-h, 72px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@media (max-width: 768px) { .lang-cred { min-height: 0; display: block; } }
