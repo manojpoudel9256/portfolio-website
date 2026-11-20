@@ -229,3 +229,27 @@
     color: var(--on-dark-2);
 }
 
+
+/* ── Education refinement: shorter photos, a calmer card rhythm, and on
+   phones a compact thumbnail card, so the section fits on one screen. ── */
+.edu-grid .edu-card { display: flex; flex-direction: column; }
+.edu-grid .edu-photo { aspect-ratio: 2 / 1; }
+.edu-grid .edu-body { flex: 1; display: flex; flex-direction: column; padding: 22px 24px 18px; }
+.edu-grid .edu-school { color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: .02em; margin-bottom: 6px; }
+.edu-grid .edu-title { font-size: clamp(1.4rem, 1.9vw, 1.7rem); line-height: 1.2; margin-bottom: 10px; }
+.edu-grid .edu-desc { font-size: 15px; line-height: 1.65; margin-bottom: 16px; }
+.edu-grid .edu-more { display: flex; justify-content: space-between; width: 100%; min-height: 44px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--hairline); font-size: 13px; }
+@media (max-width: 768px) {
+    /* thumbnail on the left with school, title and "View photo" beside it;
+       the description runs full width underneath */
+    .edu-grid { gap: 12px; }
+    .edu-grid .edu-card { display: grid; grid-template-columns: 38% minmax(0, 1fr); column-gap: 14px; row-gap: 2px; align-content: start; padding: 12px; }
+    .edu-grid .edu-body { display: contents; }
+    .edu-grid .edu-photo { grid-column: 1; grid-row: 1 / span 3; aspect-ratio: 1; border-radius: 14px; align-self: start; }
+    .edu-grid .edu-year { left: 8px; bottom: 8px; padding: 3px 8px; font-size: 10px; }
+    .edu-grid .edu-school { grid-column: 2; grid-row: 1; margin: 0; font-size: 12px; line-height: 1.4; }
+    .edu-grid .edu-title { grid-column: 2; grid-row: 2; margin: 2px 0 0; font-size: 19px; }
+    .edu-grid .edu-more { grid-column: 2; grid-row: 3; align-self: end; justify-content: flex-start; gap: 6px; width: auto; min-height: 44px; margin: 0; padding: 0; border: 0; font-size: 12.5px; }
+    .edu-grid .edu-desc { grid-column: 1 / -1; grid-row: 4; margin: 10px 0 2px; font-size: 14px; line-height: 1.55; }
+}
+@media (min-width: 769px) and (max-height: 760px) { .edu-grid .edu-photo { aspect-ratio: 2.4 / 1; } }
