@@ -205,3 +205,56 @@ window.__motion.then(function () {
     }, { threshold: 0.6 });
     marks.forEach(mark => io.observe(mark));
 })();
+
+
+// SELECTED WORK CAROUSEL — arrows step one card; dots show the position;
+// filters reset the row to the start. Native scrolling does the rest.
+(function () {
+    const track = document.querySelector(".pw-track");
+    const nav = document.querySelector(".pw-carousel-nav");
+    if (!track || !nav) return;
+    const prev = nav.querySelector(".pw-prev");
+    const next = nav.querySelector(".pw-next");
+    const dotsBox = nav.querySelector(".pw-dots");
+    const smooth = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    const cards = () => [...track.querySelectorAll(".pw-card:not(.pw-hide)")];
+    const step = () => {
+        const c = cards()[0];
+        return c ? c.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0) : track.clientWidth;
+    };
+    let positions = 1;
+    function build() {
+        const n = cards().length;
+        const perView = Math.max(1, Math.round((track.clientWidth + 1) / step()));
+        positions = Math.max(1, n - perView + 1);
+        dotsBox.innerHTML = "";
+        for (let i = 0; i < positions; i++) {
+            const d = document.createElement("span");
+            d.className = "pw-dot";
+            dotsBox.appendChild(d);
+        }
+        update();
+    }
+    function update() {
+        const max = track.scrollWidth - track.clientWidth;
+        nav.hidden = max <= 2;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max - 2;
+        const i = Math.min(positions - 1, Math.round(track.scrollLeft / step()));
+        [...dotsBox.children].forEach((d, k) => d.classList.toggle("is-active", k === i));
+    }
+    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: smooth() }));
+    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: smooth() }));
+    let queued = false;
+    track.addEventListener("scroll", () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => { queued = false; update(); });
+    }, { passive: true });
+    addEventListener("resize", build, { passive: true });
+    document.querySelectorAll(".pw-fbtn").forEach(btn => btn.addEventListener("click", () => {
+        track.scrollTo({ left: 0, behavior: "auto" });
+        requestAnimationFrame(build);
+    }));
+    build();
+})();
