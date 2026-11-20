@@ -851,3 +851,5 @@ html {
     .pw-toolbar { gap: 6px; }
     .pw-projects.pw-track { padding-top: 2px; }
 }
+/* sub-pixel part of the autoplay glide (set by page.js; 0 when idle) */
+.pw-track > .pw-card { translate: calc(var(--pw-shift, 0px) * -1) 0; }

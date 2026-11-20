@@ -371,23 +371,39 @@ window.__motion.then(function () {
         new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; }, { threshold: 0.35 }).observe(track);
     } else onScreen = true;
 
-    // the slow glide (px per second), with sub-pixel accumulation
-    let acc = 0, last = 0;
+    // The slow glide (CSS px per second). It moves in steps of one physical
+    // screen pixel (1 / devicePixelRatio CSS px) on as many frames as possible,
+    // keeping its own fractional position: whole-CSS-pixel steps on a 3x phone
+    // screen land every 2–3 frames and read as a vibration.
+    let acc = 0, last = 0, pos = 0, shifted = false;
     function tick(t) {
         const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
         last = t;
         const run = looping && !userPaused && !reduce.matches && !hover && !focusIn && !touching &&
             !dragging && !down && onScreen && t > idleUntil;
         if (run) {
+            // Browsers keep a scroller's position in whole CSS pixels, so the
+            // whole part goes to scrollLeft and the fraction to a tiny
+            // transform on the cards (drawn at physical-pixel precision).
+            const q = 1 / (window.devicePixelRatio || 1);
+            if (Math.abs(track.scrollLeft - Math.floor(pos)) > 1.5) pos = track.scrollLeft; // user moved it
             acc += (phone.matches ? 22 : 32) * dt;
-            const whole = Math.floor(acc);
-            if (whole >= 1) {
-                acc -= whole;
+            const move = Math.floor(acc / q) * q;
+            if (move > 0) {
+                acc -= move;
+                pos += move;
+                if (pos >= setW) pos -= setW;
+                const base = Math.floor(pos);
                 lastAuto = performance.now();
-                track.scrollLeft += whole;
-                if (track.scrollLeft >= setW - 0.5) track.scrollLeft -= setW;
+                if (track.scrollLeft !== base) track.scrollLeft = base;
+                track.style.setProperty("--pw-shift", (pos - base).toFixed(3) + "px");
+                shifted = true;
             }
-        } else acc = 0;
+        } else {
+            acc = 0;
+            pos = track.scrollLeft;
+            if (shifted) { track.style.setProperty("--pw-shift", "0px"); shifted = false; }
+        }
         requestAnimationFrame(tick);
     }
 
