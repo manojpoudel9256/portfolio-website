@@ -207,54 +207,204 @@ window.__motion.then(function () {
 })();
 
 
-// SELECTED WORK CAROUSEL — arrows step one card; dots show the position;
-// filters reset the row to the start. Native scrolling does the rest.
+// SELECTED WORK CAROUSEL — one row of cards that:
+//  - loops endlessly (the visible cards are cloned once after the originals,
+//    and the position wraps back by one full set, so the seam never shows);
+//  - glides slowly on its own, pausing on hover, focus, drag/touch, while
+//    off screen, or via the pause button, and never under reduced motion;
+//  - can be dragged with the mouse (and swiped on touch), settling on the
+//    nearest card; arrows step one card; dots show which project leads.
 (function () {
     const track = document.querySelector(".pw-track");
     const nav = document.querySelector(".pw-carousel-nav");
     if (!track || !nav) return;
     const prev = nav.querySelector(".pw-prev");
     const next = nav.querySelector(".pw-next");
+    const play = nav.querySelector(".pw-play");
     const dotsBox = nav.querySelector(".pw-dots");
-    const smooth = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-    const cards = () => [...track.querySelectorAll(".pw-card:not(.pw-hide)")];
-    const step = () => {
-        const c = cards()[0];
-        return c ? c.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0) : track.clientWidth;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+    const phone = matchMedia("(max-width: 768px)");
+    const LABEL = {
+        en: { pause: "Pause autoplay", play: "Play autoplay" },
+        ja: { pause: "自動スクロールを停止", play: "自動スクロールを再生" }
     };
-    let positions = 1;
+    const smooth = () => (reduce.matches ? "auto" : "smooth");
+    const originals = () => [...track.querySelectorAll(".pw-card:not(.pw-clone):not(.pw-hide)")];
+    const gap = () => parseFloat(getComputedStyle(track).columnGap) || 0;
+    const step = () => {
+        const c = originals()[0];
+        return c ? c.getBoundingClientRect().width + gap() : track.clientWidth;
+    };
+
+    let n = 0, setW = 0, looping = false;
+    let userPaused = false, hover = false, focusIn = false, touching = false, onScreen = false;
+    let idleUntil = 0, settleTimer = 0, lastAuto = 0;
+    let dragging = false, down = false, startX = 0, startScroll = 0, justDragged = false;
+
     function build() {
-        const n = cards().length;
-        const perView = Math.max(1, Math.round((track.clientWidth + 1) / step()));
-        positions = Math.max(1, n - perView + 1);
+        track.querySelectorAll(".pw-clone").forEach(c => c.remove());
+        const cards = originals();
+        n = cards.length;
+        looping = n > 1 && track.scrollWidth - track.clientWidth > 2;
+        nav.hidden = !looping;
+        if (looping) {
+            cards.forEach(card => {
+                const k = card.cloneNode(true);
+                k.classList.add("pw-clone");
+                k.setAttribute("aria-hidden", "true");
+                k.querySelectorAll("[id]").forEach(e => e.removeAttribute("id"));
+                k.querySelectorAll("[aria-labelledby]").forEach(e => e.removeAttribute("aria-labelledby"));
+                k.querySelectorAll("button, a, [tabindex]").forEach(e => e.setAttribute("tabindex", "-1"));
+                k.querySelectorAll("img").forEach(i => { i.loading = "eager"; });
+                track.appendChild(k);
+            });
+        }
+        setW = n * step();
         dotsBox.innerHTML = "";
-        for (let i = 0; i < positions; i++) {
+        if (looping) for (let i = 0; i < n; i++) {
             const d = document.createElement("span");
             d.className = "pw-dot";
             dotsBox.appendChild(d);
         }
         update();
     }
+    function wrap() {
+        if (!looping || !setW) return;
+        if (track.scrollLeft >= setW - 0.5) track.scrollLeft -= setW;
+    }
     function update() {
-        const max = track.scrollWidth - track.clientWidth;
-        nav.hidden = max <= 2;
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max - 2;
-        const i = Math.min(positions - 1, Math.round(track.scrollLeft / step()));
+        if (!looping || !setW) return;
+        const pos = ((track.scrollLeft % setW) + setW) % setW;
+        const i = Math.round(pos / step()) % n;
         [...dotsBox.children].forEach((d, k) => d.classList.toggle("is-active", k === i));
     }
-    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: smooth() }));
-    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: smooth() }));
-    let queued = false;
+    function settle() {
+        if (dragging || touching || down) return;
+        wrap();
+        const s = step();
+        const target = Math.round(track.scrollLeft / s) * s;
+        if (Math.abs(target - track.scrollLeft) > 1) track.scrollTo({ left: target, behavior: smooth() });
+    }
+    const interacted = (ms = 3000) => { idleUntil = performance.now() + ms; };
+
+    // arrows (looping, so never disabled)
+    next.addEventListener("click", () => {
+        interacted(); wrap();
+        track.scrollBy({ left: step(), behavior: smooth() });
+    });
+    prev.addEventListener("click", () => {
+        interacted();
+        if (looping && track.scrollLeft < step() - 1) track.scrollLeft += setW;
+        track.scrollBy({ left: -step(), behavior: smooth() });
+    });
+
+    // pause / play
+    function syncPlay() {
+        const lang = document.documentElement.lang === "ja" ? "ja" : "en";
+        play.setAttribute("aria-pressed", String(userPaused));
+        play.setAttribute("aria-label", LABEL[lang][userPaused ? "play" : "pause"]);
+        play.classList.toggle("is-paused", userPaused);
+    }
+    play.addEventListener("click", () => { userPaused = !userPaused; syncPlay(); });
+    new MutationObserver(syncPlay).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    if (reduce.matches) { userPaused = true; play.hidden = true; }
+    syncPlay();
+
+    // user or arrow scrolling: update the dots, then settle on a card
     track.addEventListener("scroll", () => {
-        if (queued) return;
-        queued = true;
-        requestAnimationFrame(() => { queued = false; update(); });
+        update();
+        if (performance.now() - lastAuto < 60) return; // our own glide step
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(settle, 140);
     }, { passive: true });
-    addEventListener("resize", build, { passive: true });
+
+    // hover / focus / touch / wheel pause the glide
+    track.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") hover = true; });
+    track.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { hover = false; interacted(1200); } });
+    track.addEventListener("focusin", () => { focusIn = true; });
+    track.addEventListener("focusout", () => { focusIn = false; interacted(); });
+    track.addEventListener("touchstart", () => { touching = true; interacted(); }, { passive: true });
+    const endTouch = () => {
+        touching = false; interacted();
+        clearTimeout(settleTimer); settleTimer = setTimeout(settle, 140);
+    };
+    track.addEventListener("touchend", endTouch, { passive: true });
+    track.addEventListener("touchcancel", endTouch, { passive: true });
+    track.addEventListener("wheel", () => interacted(), { passive: true });
+
+    // mouse drag
+    track.addEventListener("dragstart", e => e.preventDefault());
+    track.addEventListener("pointerdown", e => {
+        if (e.pointerType !== "mouse" || e.button !== 0) return;
+        down = true; dragging = false; startX = e.clientX; startScroll = track.scrollLeft;
+        interacted();
+    });
+    addEventListener("pointermove", e => {
+        if (!down) return;
+        const dx = e.clientX - startX;
+        if (!dragging && Math.abs(dx) > 5) { dragging = true; track.classList.add("is-dragging"); }
+        if (!dragging) return;
+        let left = startScroll - dx;
+        if (looping) {
+            if (left < 0) { left += setW; startScroll += setW; }
+            else if (left >= setW) { left -= setW; startScroll -= setW; }
+        }
+        track.scrollLeft = left;
+    });
+    addEventListener("pointerup", () => {
+        if (!down) return;
+        down = false;
+        if (dragging) {
+            dragging = false; justDragged = true;
+            track.classList.remove("is-dragging");
+            interacted(); settle();
+            setTimeout(() => { justDragged = false; }, 0);
+        }
+    });
+    // a drag must not open the project under the cursor
+    track.addEventListener("click", e => {
+        if (justDragged) { e.stopPropagation(); e.preventDefault(); justDragged = false; }
+    }, true);
+
+    // only glide while the row is on screen
+    if ("IntersectionObserver" in window) {
+        new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; }, { threshold: 0.35 }).observe(track);
+    } else onScreen = true;
+
+    // the slow glide (px per second), with sub-pixel accumulation
+    let acc = 0, last = 0;
+    function tick(t) {
+        const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
+        last = t;
+        const run = looping && !userPaused && !reduce.matches && !hover && !focusIn && !touching &&
+            !dragging && !down && onScreen && t > idleUntil;
+        if (run) {
+            acc += (phone.matches ? 22 : 32) * dt;
+            const whole = Math.floor(acc);
+            if (whole >= 1) {
+                acc -= whole;
+                lastAuto = performance.now();
+                track.scrollLeft += whole;
+                if (track.scrollLeft >= setW - 0.5) track.scrollLeft -= setW;
+            }
+        } else acc = 0;
+        requestAnimationFrame(tick);
+    }
+
+    // filters: rebuild for the visible cards and start from the first one
     document.querySelectorAll(".pw-fbtn").forEach(btn => btn.addEventListener("click", () => {
-        track.scrollTo({ left: 0, behavior: "auto" });
-        requestAnimationFrame(build);
+        requestAnimationFrame(() => { build(); track.scrollLeft = 0; interacted(); });
     }));
+    let resizeTimer = 0;
+    addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const i = setW ? Math.round(track.scrollLeft / step()) % Math.max(1, n) : 0;
+            build();
+            track.scrollLeft = i * step();
+        }, 150);
+    }, { passive: true });
+
     build();
+    requestAnimationFrame(tick);
 })();

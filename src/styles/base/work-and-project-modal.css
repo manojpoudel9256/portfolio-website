@@ -829,3 +829,25 @@ html {
 /* desktop: only whole cards show — the row is trimmed to the page margins
    (the extra room above and below keeps hover lift and shadows) */
 @media (min-width: 769px) { .pw-projects.pw-track { clip-path: inset(-12px var(--gutter) -28px var(--gutter)); } }
+
+
+/* Carousel v2: free scrolling (the script settles on cards), mouse drag,
+   pause/play button */
+.pw-projects.pw-track { scroll-snap-type: none; }
+@media (hover: hover) and (pointer: fine) {
+    .pw-track { cursor: grab; }
+    .pw-track.is-dragging { cursor: grabbing; user-select: none; }
+    .pw-track.is-dragging .pw-card { pointer-events: none; }
+}
+.pw-track img { -webkit-user-drag: none; user-select: none; }
+.pw-play .pw-ico-play { display: none; }
+.pw-play.is-paused .pw-ico-play { display: block; }
+.pw-play.is-paused .pw-ico-pause { display: none; }
+.pw-play svg { width: 16px; height: 16px; }
+.pw-play[hidden] { display: none; }
+@media (max-width: 768px) { .pw-toolbar .pw-play { display: grid; width: 40px; height: 40px; } }
+@media (max-width: 768px) {
+    .pw-toolbar .pw-play { width: 32px; height: 32px; }
+    .pw-toolbar { gap: 6px; }
+    .pw-projects.pw-track { padding-top: 2px; }
+}
