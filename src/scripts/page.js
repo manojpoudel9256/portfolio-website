@@ -285,7 +285,8 @@ window.__motion.then(function () {
         const target = Math.round(track.scrollLeft / s) * s;
         if (Math.abs(target - track.scrollLeft) > 1) track.scrollTo({ left: target, behavior: smooth() });
     }
-    const interacted = (ms = 3000) => { idleUntil = performance.now() + ms; };
+    // the glide resumes 1 s after the last drag, swipe, arrow click or filter change
+    const interacted = (ms = 1000) => { idleUntil = performance.now() + ms; };
 
     // arrows (looping, so never disabled)
     next.addEventListener("click", () => {
