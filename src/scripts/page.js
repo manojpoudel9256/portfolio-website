@@ -210,7 +210,7 @@ window.__motion.then(function () {
 // SELECTED WORK CAROUSEL — one row of cards that:
 //  - loops endlessly (the visible cards are cloned once after the originals,
 //    and the position wraps back by one full set, so the seam never shows);
-//  - glides slowly on its own, pausing on hover, focus, drag/touch, while
+//  - glides slowly on its own (also under the mouse), pausing on focus, drag/touch, while
 //    off screen, or via the pause button, and never under reduced motion;
 //  - can be dragged with the mouse (and swiped on touch), settling on the
 //    nearest card; arrows step one card; dots show which project leads.
@@ -237,7 +237,7 @@ window.__motion.then(function () {
     };
 
     let n = 0, setW = 0, looping = false;
-    let userPaused = false, hover = false, focusIn = false, touching = false, onScreen = false;
+    let userPaused = false, focusIn = false, touching = false, onScreen = false;
     let idleUntil = 0, settleTimer = 0, lastAuto = 0;
     let dragging = false, down = false, startX = 0, startScroll = 0, justDragged = false;
 
@@ -318,9 +318,8 @@ window.__motion.then(function () {
         settleTimer = setTimeout(settle, 140);
     }, { passive: true });
 
-    // hover / focus / touch / wheel pause the glide
-    track.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") hover = true; });
-    track.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") { hover = false; interacted(1200); } });
+    // focus / touch / wheel pause the glide (hovering does not: the row keeps
+    // gliding under the mouse, and a click still opens the card)
     track.addEventListener("focusin", () => { focusIn = true; });
     track.addEventListener("focusout", () => { focusIn = false; interacted(); });
     track.addEventListener("touchstart", () => { touching = true; interacted(); }, { passive: true });
@@ -379,7 +378,7 @@ window.__motion.then(function () {
     function tick(t) {
         const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
         last = t;
-        const run = looping && !userPaused && !reduce.matches && !hover && !focusIn && !touching &&
+        const run = looping && !userPaused && !reduce.matches && !focusIn && !touching &&
             !dragging && !down && onScreen && t > idleUntil;
         if (run) {
             // Browsers keep a scroller's position in whole CSS pixels, so the
