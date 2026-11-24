@@ -2,7 +2,7 @@
 
 One preview was created with the built-in image-generation tool, each using a rendered view of its actual GLB model as a geometry and appearance reference. They are photographic interpretations; the interactive inspector always shows the original file.
 
-The current preview (November 2026) is a 1672 × 941 poster supplied by Manoj: the robot arm in a dark factory with the title, tagline and Unreal Engine / Blender marks. It is exported as `-1536.webp` and `-768.webp` (WebP, quality 80–82); there is no 4K export, because upscaling would add bytes but no detail. `image-sizes.json` records dimensions and byte sizes. The prompt below produced the earlier ivory-studio preview.
+The current preview (November 2026) is a 1672 × 941 studio image supplied by Manoj: the robot arm on a plain grey background, made by lightly polishing a render of the model (no added text or badges). It is exported as `-1536.webp` and `-768.webp` (WebP, quality 80–82); there is no 4K export, because upscaling would add bytes but no detail. `image-sizes.json` records dimensions and byte sizes. The prompt below produced the earlier ivory-studio preview.
 
 ## Prompts
 
