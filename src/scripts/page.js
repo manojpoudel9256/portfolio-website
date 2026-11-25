@@ -321,7 +321,11 @@ window.__motion.then(function () {
 
     // focus / touch / wheel pause the glide (hovering does not: the row keeps
     // gliding under the mouse, and a click still opens the card)
-    track.addEventListener("focusin", () => { focusIn = true; });
+    // (only keyboard focus counts: focus handed back to a card when a project
+    // window closes after a mouse click must not keep the row stopped)
+    track.addEventListener("focusin", e => {
+        focusIn = !e.target.matches || e.target.matches(":focus-visible");
+    });
     track.addEventListener("focusout", () => { focusIn = false; interacted(); });
     track.addEventListener("touchstart", () => { touching = true; interacted(); }, { passive: true });
     const endTouch = () => {
@@ -375,12 +379,22 @@ window.__motion.then(function () {
     // screen pixel (1 / devicePixelRatio CSS px) on as many frames as possible,
     // keeping its own fractional position: whole-CSS-pixel steps on a 3x phone
     // screen land every 2–3 frames and read as a vibration.
+    // While a project window (or any other dialog) is open the row stays
+    // exactly where it was; it carries on 1 s after the window closes.
+    let overlayWas = false;
+    const overlayOpen = () => {
+        const m = document.getElementById("projModal");
+        return !!(m && m.classList.contains("active")) || !!document.querySelector("dialog[open]");
+    };
     let acc = 0, last = 0, pos = 0, shifted = false;
     function tick(t) {
+        const overlay = overlayOpen();
+        if (overlayWas && !overlay) interacted();
+        overlayWas = overlay;
         const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
         last = t;
         const run = looping && !userPaused && !reduce.matches && !focusIn && !touching &&
-            !dragging && !down && onScreen && t > idleUntil;
+            !dragging && !down && onScreen && !overlay && t > idleUntil;
         if (run) {
             // Browsers keep a scroller's position in whole CSS pixels, so the
             // whole part goes to scrollLeft and the fraction to a tiny
