@@ -10,7 +10,7 @@
         en: {
             eyebrow: 'Modeling & asset creation', title: 'Blender Work',
             intro: 'Models created in Blender for logistics, automation, and real-time scenes. Explore each asset in 3D and take a closer look at its geometry.',
-            inspect: 'Inspect model', footnote: 'AI-styled preview based on the model. The inspector displays the original GLB file.',
+            inspect: 'Inspect model', footnote: 'Preview rendered from the model. The inspector displays the original GLB file.',
             viewer: 'Interactive model inspector', close: 'Close model inspector', reset: 'Reset view', wireframe: 'Wireframe', rotate: 'Auto-rotate', reducedMotion: 'Auto-rotation is disabled while reduced motion is enabled.', environment: 'Lighting', studio: 'Studio', dark: 'Dark studio',
             help: 'Drag to orbit · Scroll or pinch to zoom · Right-drag or two-finger drag to pan. Keyboard: arrows to orbit, + / − to zoom, Home to reset.',
             triangles: 'Triangles', vertices: 'Exported vertices', meshes: 'Meshes', materials: 'Materials', textures: 'Textures', size: 'GLB file size', dimensions: 'Dimensions (X × Y × Z)',
@@ -21,7 +21,7 @@
         ja: {
             eyebrow: 'モデリング・アセット制作', title: 'Blender 制作',
             intro: '物流、自動化、リアルタイムシーン向けにBlenderで制作した3Dモデル。各アセットを自由に回転させ、形状や構成を詳しくご覧いただけます。',
-            inspect: '3Dモデルを見る', footnote: 'プレビューはモデルを参考にAIで制作した画像です。ビューアには元のGLBファイルを表示します。',
+            inspect: '3Dモデルを見る', footnote: 'プレビューはモデルからレンダリングした画像です。ビューアには元のGLBファイルを表示します。',
             viewer: '3Dモデルビューア', close: 'モデルビューアを閉じる', reset: '視点をリセット', wireframe: 'ワイヤーフレーム', rotate: '自動回転', reducedMotion: '動きを減らす設定が有効なため、自動回転は無効です。', environment: '照明', studio: 'スタジオ', dark: 'ダークスタジオ',
             help: 'ドラッグで回転・スクロール／ピンチで拡大縮小・右ドラッグ／2本指で移動。キーボード：矢印キーで回転、＋／−で拡大縮小、Homeでリセット。',
             triangles: '三角形ポリゴン', vertices: '出力された頂点', meshes: 'メッシュ', materials: 'マテリアル', textures: 'テクスチャ', size: 'GLBファイルサイズ', dimensions: '寸法（X × Y × Z）',
