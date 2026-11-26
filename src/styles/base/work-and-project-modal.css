@@ -853,3 +853,6 @@ html {
 }
 /* sub-pixel part of the autoplay glide (set by page.js; 0 when idle) */
 .pw-track > .pw-card { translate: calc(var(--pw-shift, 0px) * -1) 0; }
+
+/* repo-hosted apps have no app link to open */
+.proj-open[hidden] { display: none; }

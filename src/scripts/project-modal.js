@@ -5,6 +5,7 @@ const PT = {
         csProblem: "The problem", csDid: "What I did", csResult: "Result",
         builtWith: "Built with", live: "View live", open: "Open the app", code: "View on GitHub",
         installTitle: "Use it as an app on your iPhone",
+        stepRepo: "Open the app in <strong>Safari</strong> on your iPhone.",
         installNote: "This is a web app — no App Store needed. Add it to your home screen and it opens full-screen, just like a native app.",
         steps: [
             "Open the app link above in <strong>Safari</strong> on your iPhone.",
@@ -19,6 +20,7 @@ const PT = {
         csProblem: "課題", csDid: "取り組んだこと", csResult: "成果",
         builtWith: "使用技術", live: "ライブを見る", open: "アプリを開く", code: "GitHub で見る",
         installTitle: "iPhoneでアプリのように使う",
+        stepRepo: "iPhoneの<strong>Safari</strong>でアプリを開きます。",
         installNote: "これはウェブアプリなので App Store は不要です。ホーム画面に追加すると、ネイティブアプリのように全画面で起動します。",
         steps: [
             "iPhoneの<strong>Safari</strong>で上のアプリのリンクを開きます。",
@@ -96,6 +98,48 @@ const PROJECTS = {
                 ["Node.js テストと Playwright", "金額計算、アシスタント、セキュリティ、スマホからPCまでの全画面、端末上での実際のスキャンを自動でチェックします。"],
                 ["セキュリティヘッダー", "厳格なコンテンツセキュリティポリシー、HSTS、他サイトへの埋め込み防止。"],
                 ["Vercel", "GitHub からの自動デプロイによるホスティングです。"]
+            ]
+        }
+    },
+    vault: {
+        img: "assets/images/projects/vault.webp", cover: true, fullImg: true, type: "app", repo: true,
+        live: "https://github.com/manojpoudel9256/vault",
+        en: {
+            cs: ["My passwords, bank PINs and ID numbers were spread across Apple Notes in plain text, which isn't safe. Finding the right one was slow too, especially for accounts with more than one login, like a separate PC and mobile login for the same service.", ["I built an installable, offline-ready web app in TypeScript with no framework. Features:", "Ask in plain words: on-device search understands phrases like “gmail password” and shows every match when a service has several logins.", "Strong encryption: everything is locked with AES-256 and an Argon2id key made from your master passphrase. Nothing is stored unencrypted.", "Categories with real logos: passwords, bank & PINs, cards, ID documents, phone numbers and addresses, each with its own colour and the service's logo.", "Safety checks: warns about reused passwords, keeps password history, and lists the newest entries first.", "Smart import (optional): upload a screenshot of a login or card. Google Gemini reads it, and you check every field before saving.", "Face ID unlock, encrypted backup and restore, auto-lock, and a clipboard that clears itself."], "I moved all my notes into it and use it every day. I also ran a full security review on it with Semgrep, Gitleaks, OSV-Scanner and OWASP ZAP, and fixed everything it found, with 31 automated tests to back up the fixes."],
+            title: "Vault",
+            desc: "A private password, PIN and ID vault for iPhone that you can ask in plain words. Type “gmail password” or “4 digit pin of my bank” and it shows exactly what you need. Everything is encrypted on your phone, with no account and no cloud. Supports light / dark themes, Face ID unlock, and is built mobile-first.",
+            installExtra: "It also works offline.",
+            stack: [
+                ["TypeScript and Vite", "No framework, so the app is small and fast."],
+                ["Web Crypto API", "AES-256-GCM encryption, built into the browser."],
+                ["Argon2id (hash-wasm)", "Turns your passphrase into a key that is hard to crack."],
+                ["IndexedDB", "Your encrypted vault stays on your device."],
+                ["WebAuthn passkeys", "Face ID unlock."],
+                ["Service worker and web app manifest", "You can install it and it works offline."],
+                ["Google Gemini API", "Optional screenshot import. Search sends only entry names, never passwords."],
+                ["Node.js test runner", "31 automated tests for encryption, backups and Face ID."],
+                ["Content Security Policy", "Limits what the page is allowed to load, for security."],
+                ["HyperFrames", "The promo video, made from real app footage."],
+                ["Vercel", "Hosting."]
+            ]
+        },
+        ja: {
+            cs: ["パスワード、銀行の暗証番号、身分証の番号を Apple のメモに平文のまま散らばらせていて、安全ではありませんでした。目的のものを探すのにも時間がかかり、同じサービスで PC 用とスマホ用のように複数のログインがあるアカウントでは特に大変でした。", ["フレームワークを使わない TypeScript で、インストールしてオフラインでも使えるウェブアプリを作りました。主な機能：", "ふだんの言葉で質問：端末内の検索が「gmail password」のような言い方を理解し、1つのサービスに複数のログインがあればすべて表示します。", "強力な暗号化：すべてのデータを、マスターパスフレーズから Argon2id で作った鍵と AES-256 で保護します。暗号化されていないデータは保存しません。", "ロゴ付きのカテゴリ：パスワード、銀行・暗証番号、カード、身分証、電話番号、住所。カテゴリごとの色と、各サービスのロゴで表示します。", "安全チェック：使い回しのパスワードを警告し、パスワードの履歴を残し、新しい項目を先頭に表示します。", "スマートインポート（任意）：ログイン画面やカードのスクリーンショットをアップロードすると Google Gemini が読み取り、保存前にすべての項目を自分で確認できます。", "Face ID でのロック解除、暗号化したバックアップと復元、自動ロック、自動で消えるクリップボード。"], "メモの内容をすべて移し、毎日使っています。Semgrep、Gitleaks、OSV-Scanner、OWASP ZAP でセキュリティレビューを行い、見つかった問題はすべて修正し、31件の自動テストで修正を確認しています。"],
+            title: "Vault（パスワード管理）",
+            desc: "パスワード・暗証番号・身分証の番号を、ふだんの言葉で探せる iPhone 用のプライベートな金庫です。「gmail password」や「銀行の4桁の暗証番号」と入力すると、必要な情報だけを表示します。データはすべて端末内で暗号化され、アカウント登録もクラウドも不要です。ライト／ダークテーマと Face ID でのロック解除に対応し、モバイルファーストで設計しています。",
+            installExtra: "オフラインでも使えます。",
+            stack: [
+                ["TypeScript と Vite", "フレームワークを使わないため、アプリは軽量で高速です。"],
+                ["Web Crypto API", "ブラウザに組み込まれた AES-256-GCM 暗号化です。"],
+                ["Argon2id（hash-wasm）", "パスフレーズから、解読されにくい鍵を作ります。"],
+                ["IndexedDB", "暗号化した金庫は端末内に保存されます。"],
+                ["WebAuthn パスキー", "Face ID でのロック解除です。"],
+                ["Service Worker とウェブアプリマニフェスト", "インストールでき、オフラインでも動作します。"],
+                ["Google Gemini API", "任意のスクリーンショット読み取り。検索で送るのは項目名だけで、パスワードは送りません。"],
+                ["Node.js テストランナー", "暗号化・バックアップ・Face ID を確認する31件の自動テストです。"],
+                ["コンテンツセキュリティポリシー（CSP）", "セキュリティのため、ページが読み込めるものを制限します。"],
+                ["HyperFrames", "実際のアプリ画面から作ったプロモーション動画です。"],
+                ["Vercel", "ホスティングです。"]
             ]
         }
     },
@@ -249,8 +293,11 @@ function renderProject() {
         document.getElementById("pmInstallNote").textContent = t.installNote + (c.installExtra ? (lang === "ja" ? "" : " ") + c.installExtra : "");
         const steps = document.getElementById("pmSteps");
         steps.innerHTML = "";
-        t.steps.forEach(function (s) { const li = document.createElement("li"); li.innerHTML = "<span>" + s + "</span>"; steps.appendChild(li); });
+        const stepList = t.steps.slice();
+        if (p.repo) stepList[0] = t.stepRepo;
+        stepList.forEach(function (s) { const li = document.createElement("li"); li.innerHTML = "<span>" + s + "</span>"; steps.appendChild(li); });
         const open = document.getElementById("pmOpen");
+        open.hidden = !!p.repo;
         open.href = p.live;
         open.querySelector("span").textContent = t.open;
     } else {

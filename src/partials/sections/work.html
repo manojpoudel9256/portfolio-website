@@ -38,6 +38,26 @@
          (with the next peeking in) on phones; arrows and position dots below. -->
     <div class="pw-projects pw-track" aria-label="Projects" data-i18n-aria="workTrack">
 
+        <article class="pw-card pw-tool" data-cat="apps uiux" onclick="openProject('vault')">
+                <div class="pw-cover">
+                    <img src="assets/images/projects/vault.webp" srcset="assets/images/projects/vault-800.webp 800w, assets/images/projects/vault.webp 1600w" sizes="(max-width: 768px) 92vw, (max-width: 1100px) 46vw, 600px" alt="Vault: three iPhone screens showing the locked vault, a search for gmail password with two Gmail logins, and the headline Ask your vault in plain words" width="1600" height="900"
+                        loading="lazy">
+                </div>
+                <div class="pw-body">
+                    <h3 class="pw-name" id="pw-name-vault" data-i18n="pjVaultName">Vault</h3>
+                    <p class="pw-desc" data-i18n="pjVaultShort">A private password, PIN and ID vault for iPhone that you ask in plain words, encrypted on your phone.</p>
+                    <div class="pw-tags">
+                        <span class="pw-chip">TypeScript</span>
+                        <span class="pw-chip">Web Crypto</span>
+                        <span class="pw-chip">PWA</span>
+                        <span class="pw-chip">Face ID</span>
+                    </div>
+                    <button type="button" class="pw-view" aria-labelledby="pw-view-vault pw-name-vault"
+                        onclick="event.stopPropagation(); openProject('vault')"><span id="pw-view-vault" data-i18n="workViewProject">View project</span>
+                        <span aria-hidden="true">→</span></button>
+                </div>
+            </article>
+
         <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbAnalyzer')">
                 <div class="pw-cover">
                     <img src="assets/images/projects/glb-analyzer.webp" srcset="assets/images/projects/glb-analyzer-800.webp 800w, assets/images/projects/glb-analyzer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Analyzer: understand every mesh. Geometry, textures and PDF reports." width="1672" height="941"
